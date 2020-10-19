@@ -1,0 +1,2297 @@
+{
+	"info": {
+		"_postman_id": "3de4010c-fdd6-4f42-b716-89c94dd21c84",
+		"name": "FFME2-12_Company_admin_should_be_able_to_register_app_user_from_admin_panel",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "Positive",
+			"item": [
+				{
+					"name": "FFME2-16_user-login",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "a576acd1-ac8b-4ccf-adba-10976f627ebc",
+								"exec": [
+									"var jsonData= JSON.parse(responseBody);\r",
+									"pm.environment.set(\"Token\", jsonData.auth_token);\r",
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJleHAiOjE2MDI5OTEzMDksImlhdCI6MTYwMjk4NzcwOSwic3ViIjo1MTgsInVzZXJfdHlwZSI6IkRhc2hib2FyZCIsIm5hbWUiOiJFdmEgUmFscGgiLCJlbWFpbCI6ImFiY0BnbWFpbC5jb20iLCJtZW1iZXJfdHlwZSI6MSwiY29tcGFueV9pZCI6MzU2LCJkZXNpZ25hdGlvbiI6bnVsbCwiZGVwYXJ0bWVudCI6bnVsbH0.HuDSmI9-a-cVgqLkcbVef6b4_rooENnBqOR36NE163c",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n \"email\": \"abc@gmail.com\",\r\n \"password\": \"Tafadar58\"\r\n\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "167.99.73.130:30287/api/v1/field-force/auth/dashboard-user-login",
+							"host": [
+								"167",
+								"99",
+								"73",
+								"130"
+							],
+							"port": "30287",
+							"path": [
+								"api",
+								"v1",
+								"field-force",
+								"auth",
+								"dashboard-user-login"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "FFME2-12_Company_admin_should_be_able_to_register_app_user_from_admin_panel",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "234b9f34-94bf-4adf-84ce-279fb7d402f1",
+								"exec": [
+									"pm.test(\"Status code is 201\", function () {\r",
+									"    pm.response.to.have.status(201);\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Response time is less than 600ms\", function () {\r",
+									"    pm.expect(pm.response.responseTime).to.be.below(600);\r",
+									"});\r",
+									"var jsonData = JSON.parse(responseBody);\r",
+									"\r",
+									"var schema =\r",
+									"{\r",
+									"    \"$schema\": \"http://json-schema.org/draft-07/schema\",\r",
+									"    \"$id\": \"http://example.com/example.json\",\r",
+									"    \"type\": \"object\",\r",
+									"    \"title\": \"The root schema\",\r",
+									"    \"description\": \"The root schema comprises the entire JSON document.\",\r",
+									"    \"default\": {},\r",
+									"    \"examples\": [\r",
+									"        {\r",
+									"            \"message\": \"Successfully registered.\",\r",
+									"            \"status\": \"success\"\r",
+									"        }\r",
+									"    ],\r",
+									"    \"required\": [\r",
+									"        \"message\",\r",
+									"        \"status\"\r",
+									"    ],\r",
+									"    \"properties\": {\r",
+									"        \"message\": {\r",
+									"            \"$id\": \"#/properties/message\",\r",
+									"            \"type\": \"string\",\r",
+									"            \"title\": \"The message schema\",\r",
+									"            \"description\": \"An explanation about the purpose of this instance.\",\r",
+									"            \"default\": \"\",\r",
+									"            \"examples\": [\r",
+									"                \"Successfully registered.\"\r",
+									"            ]\r",
+									"        },\r",
+									"        \"status\": {\r",
+									"            \"$id\": \"#/properties/status\",\r",
+									"            \"type\": \"string\",\r",
+									"            \"title\": \"The status schema\",\r",
+									"            \"description\": \"An explanation about the purpose of this instance.\",\r",
+									"            \"default\": \"\",\r",
+									"            \"examples\": [\r",
+									"                \"success\"\r",
+									"            ]\r",
+									"        }\r",
+									"    },\r",
+									"    \"additionalProperties\": true\r",
+									"}\r",
+									"tests[\"valid schema\"] = tv4.validate(jsonData, schema);"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{Token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n\"phone_number\": \"3473286965\",\r\n\"company_id\": 377,\r\n\"iso_code\": \"US\",\r\n\"first_name\":\"Duha\",\r\n\"last_name\":\"C\",\r\n\"nid\":\"235478954\",\r\n\"designation\":\"QA Field\",\r\n\"department\":\"Tech\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{URL}}/api/v1/field-force/auth/register-user",
+							"host": [
+								"{{URL}}"
+							],
+							"path": [
+								"api",
+								"v1",
+								"field-force",
+								"auth",
+								"register-user"
+							]
+						},
+						"description": "Objective:Company admin should be able to register app user from admin panel.\r\nSE: Shiblu Ahmed\r\nPO: Pranto Majumder\r\nQA: Duha Chowdhury\r\nReviewer:Pranto Majumder\r\nTest Steps: Test steps includes the following payload as a json format in body\r\nMethod: POST\r\n{\r\n\"phone_number\": \"9173476965\",\r\n\"company_id\": 377,\r\n\"iso_code\": \"US\",\r\n\"first_name\":\"Duha\",\r\n\"last_name\":\"C\",\r\n\"nid\":\"235478954\",\r\n\"designation\":\"QA Field\",\r\n\"department\":\"Tech\"\r\n}\r\nExpected Result:\r\n {\r\n    \"message\": \"Successfully registered.\",\r\n    \"status\": \"success\"\r\n}\r\n\r\nActual Result:\r\n{\r\n    \"message\": \"Successfully registered.\",\r\n    \"status\": \"success\"\r\n}\r\n\r\nStatus Code: 201 CREATED\r\nTest Result: Pass"
+					},
+					"response": []
+				}
+			],
+			"protocolProfileBehavior": {}
+		},
+		{
+			"name": "Negative",
+			"item": [
+				{
+					"name": "FFME2-12.1.1_negativeTest_register_app_user_winthoutphonenumber",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "cad2c2d5-c86b-404f-879b-f9f49910828b",
+								"exec": [
+									"pm.test(\"Status code is 403\", function () {\r",
+									"    pm.response.to.have.status(403);\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Response time is less than 600ms\", function () {\r",
+									"    pm.expect(pm.response.responseTime).to.be.below(600);\r",
+									"});\r",
+									"var jsonData = JSON.parse(responseBody);\r",
+									"var schema=\r",
+									"{\r",
+									"    \"$schema\": \"http://json-schema.org/draft-07/schema\",\r",
+									"    \"$id\": \"http://example.com/example.json\",\r",
+									"    \"type\": \"object\",\r",
+									"    \"title\": \"The root schema\",\r",
+									"    \"description\": \"The root schema comprises the entire JSON document.\",\r",
+									"    \"default\": {},\r",
+									"    \"examples\": [\r",
+									"        {\r",
+									"            \"message\": [\r",
+									"                \"phone_number must be non-empty\"\r",
+									"            ],\r",
+									"            \"status\": \"failed\"\r",
+									"        }\r",
+									"    ],\r",
+									"    \"required\": [\r",
+									"        \"message\",\r",
+									"        \"status\"\r",
+									"    ],\r",
+									"    \"properties\": {\r",
+									"        \"message\": {\r",
+									"            \"$id\": \"#/properties/message\",\r",
+									"            \"type\": \"array\",\r",
+									"            \"title\": \"The message schema\",\r",
+									"            \"description\": \"An explanation about the purpose of this instance.\",\r",
+									"            \"default\": [],\r",
+									"            \"examples\": [\r",
+									"                [\r",
+									"                    \"phone_number must be non-empty\"\r",
+									"                ]\r",
+									"            ],\r",
+									"            \"additionalItems\": true,\r",
+									"            \"items\": {\r",
+									"                \"$id\": \"#/properties/message/items\",\r",
+									"                \"anyOf\": [\r",
+									"                    {\r",
+									"                        \"$id\": \"#/properties/message/items/anyOf/0\",\r",
+									"                        \"type\": \"string\",\r",
+									"                        \"title\": \"The first anyOf schema\",\r",
+									"                        \"description\": \"An explanation about the purpose of this instance.\",\r",
+									"                        \"default\": \"\",\r",
+									"                        \"examples\": [\r",
+									"                            \"phone_number must be non-empty\"\r",
+									"                        ]\r",
+									"                    }\r",
+									"                ]\r",
+									"            }\r",
+									"        },\r",
+									"        \"status\": {\r",
+									"            \"$id\": \"#/properties/status\",\r",
+									"            \"type\": \"string\",\r",
+									"            \"title\": \"The status schema\",\r",
+									"            \"description\": \"An explanation about the purpose of this instance.\",\r",
+									"            \"default\": \"\",\r",
+									"            \"examples\": [\r",
+									"                \"failed\"\r",
+									"            ]\r",
+									"        }\r",
+									"    },\r",
+									"    \"additionalProperties\": true\r",
+									"}\r",
+									"tests[\"valid schema\"] = tv4.validate(jsonData, schema);"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{Token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n\"phone_number\": \"\",\r\n\"company_id\": 377,\r\n\"iso_code\": \"US\",\r\n\"first_name\":\"Duha\",\r\n\"last_name\":\"C\",\r\n\"nid\":\"235478954\",\r\n\"designation\":\"QA Field\",\r\n\"department\":\"Tech\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{URL}}/api/v1/field-force/auth/register-user",
+							"host": [
+								"{{URL}}"
+							],
+							"path": [
+								"api",
+								"v1",
+								"field-force",
+								"auth",
+								"register-user"
+							]
+						},
+						"description": "Objective:Company admin should not be able to register app user without any phone number\r\nSE: Shiblu Ahmed\r\nPO: Pranto Majumder\r\nQA: Duha Chowdhury\r\nReviewer:Pranto Majumder\r\nTest Steps: Test steps includes the following payload as a json format in body\r\nMethod: POST\r\n{\r\n\"phone_number\": \"\",\r\n\"company_id\": 377,\r\n\"iso_code\": \"US\",\r\n\"first_name\":\"Duha\",\r\n\"last_name\":\"C\",\r\n\"nid\":\"235478954\",\r\n\"designation\":\"QA Field\",\r\n\"department\":\"Tech\"\r\n}\r\nExpected Result:\r\n{\r\n    \"message\": [\r\n        \"phone_number must be non-empty\"\r\n    ],\r\n    \"status\": \"failed\"\r\n}\r\n\r\nActual Result:\r\n{\r\n    \"message\": [\r\n        \"phone_number must be non-empty\"\r\n    ],\r\n    \"status\": \"failed\"\r\n}\r\n\r\nStatus Code: 403 forbidden\r\nTest Result: Pass"
+					},
+					"response": []
+				},
+				{
+					"name": "FFME2-12.1.2_negativeTest_register_app_user_leaving all fields empty",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "13482949-a85c-4cdf-be9c-de6620db57a1",
+								"exec": [
+									"pm.test(\"Status code is 403\", function () {\r",
+									"    pm.response.to.have.status(403);\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Response time is less than 600ms\", function () {\r",
+									"    pm.expect(pm.response.responseTime).to.be.below(600);\r",
+									"});\r",
+									"var jsonData = JSON.parse(responseBody);\r",
+									"var schema=\r",
+									"{\r",
+									"    \"$schema\": \"http://json-schema.org/draft-07/schema\",\r",
+									"    \"$id\": \"http://example.com/example.json\",\r",
+									"    \"type\": \"object\",\r",
+									"    \"title\": \"The root schema\",\r",
+									"    \"description\": \"The root schema comprises the entire JSON document.\",\r",
+									"    \"default\": {},\r",
+									"    \"examples\": [\r",
+									"        {\r",
+									"            \"message\": [\r",
+									"                \"phone_number must be non-empty\"\r",
+									"            ],\r",
+									"            \"status\": \"failed\"\r",
+									"        }\r",
+									"    ],\r",
+									"    \"required\": [\r",
+									"        \"message\",\r",
+									"        \"status\"\r",
+									"    ],\r",
+									"    \"properties\": {\r",
+									"        \"message\": {\r",
+									"            \"$id\": \"#/properties/message\",\r",
+									"            \"type\": \"array\",\r",
+									"            \"title\": \"The message schema\",\r",
+									"            \"description\": \"An explanation about the purpose of this instance.\",\r",
+									"            \"default\": [],\r",
+									"            \"examples\": [\r",
+									"                [\r",
+									"                    \"phone_number must be non-empty\"\r",
+									"                ]\r",
+									"            ],\r",
+									"            \"additionalItems\": true,\r",
+									"            \"items\": {\r",
+									"                \"$id\": \"#/properties/message/items\",\r",
+									"                \"anyOf\": [\r",
+									"                    {\r",
+									"                        \"$id\": \"#/properties/message/items/anyOf/0\",\r",
+									"                        \"type\": \"string\",\r",
+									"                        \"title\": \"The first anyOf schema\",\r",
+									"                        \"description\": \"An explanation about the purpose of this instance.\",\r",
+									"                        \"default\": \"\",\r",
+									"                        \"examples\": [\r",
+									"                            \"phone_number must be non-empty\"\r",
+									"                        ]\r",
+									"                    }\r",
+									"                ]\r",
+									"            }\r",
+									"        },\r",
+									"        \"status\": {\r",
+									"            \"$id\": \"#/properties/status\",\r",
+									"            \"type\": \"string\",\r",
+									"            \"title\": \"The status schema\",\r",
+									"            \"description\": \"An explanation about the purpose of this instance.\",\r",
+									"            \"default\": \"\",\r",
+									"            \"examples\": [\r",
+									"                \"failed\"\r",
+									"            ]\r",
+									"        }\r",
+									"    },\r",
+									"    \"additionalProperties\": true\r",
+									"}\r",
+									"tests[\"valid schema\"] = tv4.validate(jsonData, schema);"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{Token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n\"phone_number\": \" \",\r\n\"company_id\": \"\",\r\n\"iso_code\": \"\",\r\n\"first_name\":\"\",\r\n\"last_name\":\"\",\r\n\"nid\":\"\",\r\n\"designation\":\"\",\r\n\"department\":\"\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{URL}}/api/v1/field-force/auth/register-user",
+							"host": [
+								"{{URL}}"
+							],
+							"path": [
+								"api",
+								"v1",
+								"field-force",
+								"auth",
+								"register-user"
+							]
+						},
+						"description": "Objective:Company admin should not be able to register app leaving all required field empty\r\nSE: Shiblu Ahmed\r\nPO: Pranto Majumder\r\nQA: Duha Chowdhury\r\nReviewer:Pranto Majumder\r\nTest Steps: Test steps includes the following payload as a json format in body\r\nMethod: POST\r\n{\r\n\"phone_number\": \" \",\r\n\"company_id\": \"\",\r\n\"iso_code\": \"\",\r\n\"first_name\":\"\",\r\n\"last_name\":\"\",\r\n\"nid\":\"\",\r\n\"designation\":\"\",\r\n\"department\":\"\"\r\n}epartment\":\"Tech\"\r\n}\r\nExpected Result:\r\n{\r\n    \"message\": [\r\n        \"iso_code must be non-empty\",\r\n        \"company_id must be non-empty\",\r\n        \"first_name must be non-empty\",\r\n        \"last_name must be non-empty\",\r\n        \"nid must be non-empty\",\r\n        \"designation must be non-empty\",\r\n        \"department must be non-empty\"\r\n    ],\r\n    \"status\": \"failed\"\r\n}\r\n\r\nActual Result:\r\n{\r\n    \"message\": [\r\n        \"iso_code must be non-empty\",\r\n        \"company_id must be non-empty\",\r\n        \"first_name must be non-empty\",\r\n        \"last_name must be non-empty\",\r\n        \"nid must be non-empty\",\r\n        \"designation must be non-empty\",\r\n        \"department must be non-empty\"\r\n    ],\r\n    \"status\": \"failed\"\r\n}\r\n\r\nStatus Code: 403 forbidden\r\nTest Result: Pass"
+					},
+					"response": []
+				},
+				{
+					"name": "FFME2-12.1.3_negativeTest_register_app_user_without phone number & company id",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "85548c5f-3b70-4e33-8cb3-33f763f35b7c",
+								"exec": [
+									"pm.test(\"Status code is 403\", function () {\r",
+									"    pm.response.to.have.status(403);\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Response time is less than 600ms\", function () {\r",
+									"    pm.expect(pm.response.responseTime).to.be.below(600);\r",
+									"});\r",
+									"var jsonData = JSON.parse(responseBody);\r",
+									"var schema=\r",
+									"{\r",
+									"    \"$schema\": \"http://json-schema.org/draft-07/schema\",\r",
+									"    \"$id\": \"http://example.com/example.json\",\r",
+									"    \"type\": \"object\",\r",
+									"    \"title\": \"The root schema\",\r",
+									"    \"description\": \"The root schema comprises the entire JSON document.\",\r",
+									"    \"default\": {},\r",
+									"    \"examples\": [\r",
+									"        {\r",
+									"            \"message\": [\r",
+									"                \"phone_number must be non-empty\"\r",
+									"            ],\r",
+									"            \"status\": \"failed\"\r",
+									"        }\r",
+									"    ],\r",
+									"    \"required\": [\r",
+									"        \"message\",\r",
+									"        \"status\"\r",
+									"    ],\r",
+									"    \"properties\": {\r",
+									"        \"message\": {\r",
+									"            \"$id\": \"#/properties/message\",\r",
+									"            \"type\": \"array\",\r",
+									"            \"title\": \"The message schema\",\r",
+									"            \"description\": \"An explanation about the purpose of this instance.\",\r",
+									"            \"default\": [],\r",
+									"            \"examples\": [\r",
+									"                [\r",
+									"                    \"phone_number must be non-empty\"\r",
+									"                ]\r",
+									"            ],\r",
+									"            \"additionalItems\": true,\r",
+									"            \"items\": {\r",
+									"                \"$id\": \"#/properties/message/items\",\r",
+									"                \"anyOf\": [\r",
+									"                    {\r",
+									"                        \"$id\": \"#/properties/message/items/anyOf/0\",\r",
+									"                        \"type\": \"string\",\r",
+									"                        \"title\": \"The first anyOf schema\",\r",
+									"                        \"description\": \"An explanation about the purpose of this instance.\",\r",
+									"                        \"default\": \"\",\r",
+									"                        \"examples\": [\r",
+									"                            \"phone_number must be non-empty\"\r",
+									"                        ]\r",
+									"                    }\r",
+									"                ]\r",
+									"            }\r",
+									"        },\r",
+									"        \"status\": {\r",
+									"            \"$id\": \"#/properties/status\",\r",
+									"            \"type\": \"string\",\r",
+									"            \"title\": \"The status schema\",\r",
+									"            \"description\": \"An explanation about the purpose of this instance.\",\r",
+									"            \"default\": \"\",\r",
+									"            \"examples\": [\r",
+									"                \"failed\"\r",
+									"            ]\r",
+									"        }\r",
+									"    },\r",
+									"    \"additionalProperties\": true\r",
+									"}\r",
+									"tests[\"valid schema\"] = tv4.validate(jsonData, schema);"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{Token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n\"phone_number\": \"\",\r\n\"company_id\":\"\",\r\n\"iso_code\": \"US\",\r\n\"first_name\":\"Duha\",\r\n\"last_name\":\"C\",\r\n\"nid\":\"235478954\",\r\n\"designation\":\"QA Field\",\r\n\"department\":\"Tech\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{URL}}/api/v1/field-force/auth/register-user",
+							"host": [
+								"{{URL}}"
+							],
+							"path": [
+								"api",
+								"v1",
+								"field-force",
+								"auth",
+								"register-user"
+							]
+						},
+						"description": "Objective:Company admin should not be able to register app user without any phone number & company id\r\nSE: Shiblu Ahmed\r\nPO: Pranto Majumder\r\nQA: Duha Chowdhury\r\nReviewer:Pranto Majumder\r\nTest Steps: Test steps includes the following payload as a json format in body\r\nMethod: POST\r\n{\r\n\"phone_number\": \"\",\r\n\"company_id\": \"\"\r\n\"iso_code\": \"US\",\r\n\"first_name\":\"Duha\",\r\n\"last_name\":\"C\",\r\n\"nid\":\"235478954\",\r\n\"designation\":\"QA Field\",\r\n\"department\":\"Tech\"\r\n}\r\nExpected Result:\r\n{\r\n    \"message\": [\r\n        \"phone_number must be non-empty\",\r\n        \"company_id must be non-empty\"\r\n    ],\r\n    \"status\": \"failed\"\r\n}\r\n\r\nActual Result:\r\n{\r\n    \"message\": [\r\n        \"phone_number must be non-empty\",\r\n        \"company_id must be non-empty\"\r\n    ],\r\n    \"status\": \"failed\"\r\n}\r\n\r\nStatus Code: 403 forbidden\r\nTest Result: Pass"
+					},
+					"response": []
+				},
+				{
+					"name": "FFME2-12.1.4_negativeTest_register_app_user_without phone number & iso code",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "2d959c04-33d5-4dff-a470-49223bed2ca5",
+								"exec": [
+									"pm.test(\"Status code is 403\", function () {\r",
+									"    pm.response.to.have.status(403);\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Response time is less than 600ms\", function () {\r",
+									"    pm.expect(pm.response.responseTime).to.be.below(600);\r",
+									"});\r",
+									"var jsonData = JSON.parse(responseBody);\r",
+									"var schema=\r",
+									"{\r",
+									"    \"$schema\": \"http://json-schema.org/draft-07/schema\",\r",
+									"    \"$id\": \"http://example.com/example.json\",\r",
+									"    \"type\": \"object\",\r",
+									"    \"title\": \"The root schema\",\r",
+									"    \"description\": \"The root schema comprises the entire JSON document.\",\r",
+									"    \"default\": {},\r",
+									"    \"examples\": [\r",
+									"        {\r",
+									"            \"message\": [\r",
+									"                \"phone_number must be non-empty\"\r",
+									"            ],\r",
+									"            \"status\": \"failed\"\r",
+									"        }\r",
+									"    ],\r",
+									"    \"required\": [\r",
+									"        \"message\",\r",
+									"        \"status\"\r",
+									"    ],\r",
+									"    \"properties\": {\r",
+									"        \"message\": {\r",
+									"            \"$id\": \"#/properties/message\",\r",
+									"            \"type\": \"array\",\r",
+									"            \"title\": \"The message schema\",\r",
+									"            \"description\": \"An explanation about the purpose of this instance.\",\r",
+									"            \"default\": [],\r",
+									"            \"examples\": [\r",
+									"                [\r",
+									"                    \"phone_number must be non-empty\"\r",
+									"                ]\r",
+									"            ],\r",
+									"            \"additionalItems\": true,\r",
+									"            \"items\": {\r",
+									"                \"$id\": \"#/properties/message/items\",\r",
+									"                \"anyOf\": [\r",
+									"                    {\r",
+									"                        \"$id\": \"#/properties/message/items/anyOf/0\",\r",
+									"                        \"type\": \"string\",\r",
+									"                        \"title\": \"The first anyOf schema\",\r",
+									"                        \"description\": \"An explanation about the purpose of this instance.\",\r",
+									"                        \"default\": \"\",\r",
+									"                        \"examples\": [\r",
+									"                            \"phone_number must be non-empty\"\r",
+									"                        ]\r",
+									"                    }\r",
+									"                ]\r",
+									"            }\r",
+									"        },\r",
+									"        \"status\": {\r",
+									"            \"$id\": \"#/properties/status\",\r",
+									"            \"type\": \"string\",\r",
+									"            \"title\": \"The status schema\",\r",
+									"            \"description\": \"An explanation about the purpose of this instance.\",\r",
+									"            \"default\": \"\",\r",
+									"            \"examples\": [\r",
+									"                \"failed\"\r",
+									"            ]\r",
+									"        }\r",
+									"    },\r",
+									"    \"additionalProperties\": true\r",
+									"}\r",
+									"tests[\"valid schema\"] = tv4.validate(jsonData, schema);"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{Token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n\"phone_number\": \"\",\r\n\"company_id\":\"377\",\r\n\"iso_code\": \"US\",\r\n\"first_name\":\"\",\r\n\"last_name\":\"C\",\r\n\"nid\":\"235478954\",\r\n\"designation\":\"QA Field\",\r\n\"department\":\"Tech\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{URL}}/api/v1/field-force/auth/register-user",
+							"host": [
+								"{{URL}}"
+							],
+							"path": [
+								"api",
+								"v1",
+								"field-force",
+								"auth",
+								"register-user"
+							]
+						},
+						"description": "Objective:Company admin should not be able to register app user without any phone number & iso code\r\nSE: Shiblu Ahmed\r\nPO: Pranto Majumder\r\nQA: Duha Chowdhury\r\nReviewer:Pranto Majumder\r\nTest Steps: Test steps includes the following payload as a json format in body\r\nMethod: POST\r\n{\r\n\"phone_number\": \"\",\r\n\"company_id\": 377,\r\n\"iso_code\": \"\",\r\n\"first_name\":\"Duha\",\r\n\"last_name\":\"C\",\r\n\"nid\":\"235478954\",\r\n\"designation\":\"QA Field\",\r\n\"department\":\"Tech\"\r\n}\r\nExpected Result:\r\n{\r\n    \"message\": [\r\n        \"phone_number must be non-empty\",\r\n        \"iso_code must be non-empty\"\r\n    ],\r\n    \"status\": \"failed\"\r\n}\r\n\r\nActual Result:\r\n{\r\n    \"message\": [\r\n        \"phone_number must be non-empty\",\r\n        \"iso_code must be non-empty\"\r\n    ],\r\n    \"status\": \"failed\"\r\n}\r\n\r\nStatus Code: 403 forbidden\r\nTest Result: Pass"
+					},
+					"response": []
+				},
+				{
+					"name": "FFME2-12.1.5_negativeTest_register_app_user_without phone number & firstname",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "cf47efad-754c-4de8-ae29-e98738fb314f",
+								"exec": [
+									"pm.test(\"Status code is 403\", function () {\r",
+									"    pm.response.to.have.status(403);\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Response time is less than 600ms\", function () {\r",
+									"    pm.expect(pm.response.responseTime).to.be.below(600);\r",
+									"});\r",
+									"var jsonData = JSON.parse(responseBody);\r",
+									"var schema=\r",
+									"{\r",
+									"    \"$schema\": \"http://json-schema.org/draft-07/schema\",\r",
+									"    \"$id\": \"http://example.com/example.json\",\r",
+									"    \"type\": \"object\",\r",
+									"    \"title\": \"The root schema\",\r",
+									"    \"description\": \"The root schema comprises the entire JSON document.\",\r",
+									"    \"default\": {},\r",
+									"    \"examples\": [\r",
+									"        {\r",
+									"            \"message\": [\r",
+									"                \"phone_number must be non-empty\"\r",
+									"            ],\r",
+									"            \"status\": \"failed\"\r",
+									"        }\r",
+									"    ],\r",
+									"    \"required\": [\r",
+									"        \"message\",\r",
+									"        \"status\"\r",
+									"    ],\r",
+									"    \"properties\": {\r",
+									"        \"message\": {\r",
+									"            \"$id\": \"#/properties/message\",\r",
+									"            \"type\": \"array\",\r",
+									"            \"title\": \"The message schema\",\r",
+									"            \"description\": \"An explanation about the purpose of this instance.\",\r",
+									"            \"default\": [],\r",
+									"            \"examples\": [\r",
+									"                [\r",
+									"                    \"phone_number must be non-empty\"\r",
+									"                ]\r",
+									"            ],\r",
+									"            \"additionalItems\": true,\r",
+									"            \"items\": {\r",
+									"                \"$id\": \"#/properties/message/items\",\r",
+									"                \"anyOf\": [\r",
+									"                    {\r",
+									"                        \"$id\": \"#/properties/message/items/anyOf/0\",\r",
+									"                        \"type\": \"string\",\r",
+									"                        \"title\": \"The first anyOf schema\",\r",
+									"                        \"description\": \"An explanation about the purpose of this instance.\",\r",
+									"                        \"default\": \"\",\r",
+									"                        \"examples\": [\r",
+									"                            \"phone_number must be non-empty\"\r",
+									"                        ]\r",
+									"                    }\r",
+									"                ]\r",
+									"            }\r",
+									"        },\r",
+									"        \"status\": {\r",
+									"            \"$id\": \"#/properties/status\",\r",
+									"            \"type\": \"string\",\r",
+									"            \"title\": \"The status schema\",\r",
+									"            \"description\": \"An explanation about the purpose of this instance.\",\r",
+									"            \"default\": \"\",\r",
+									"            \"examples\": [\r",
+									"                \"failed\"\r",
+									"            ]\r",
+									"        }\r",
+									"    },\r",
+									"    \"additionalProperties\": true\r",
+									"}\r",
+									"tests[\"valid schema\"] = tv4.validate(jsonData, schema);"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{Token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n\"phone_number\": \"\",\r\n\"company_id\":\"377\",\r\n\"iso_code\": \"US\",\r\n\"first_name\":\"\",\r\n\"last_name\":\"C\",\r\n\"nid\":\"235478954\",\r\n\"designation\":\"QA Field\",\r\n\"department\":\"Tech\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{URL}}/api/v1/field-force/auth/register-user",
+							"host": [
+								"{{URL}}"
+							],
+							"path": [
+								"api",
+								"v1",
+								"field-force",
+								"auth",
+								"register-user"
+							]
+						},
+						"description": "Objective:Company admin should not be able to register app user without any phone number & iso code\r\nSE: Shiblu Ahmed\r\nPO: Pranto Majumder\r\nQA: Duha Chowdhury\r\nReviewer:Pranto Majumder\r\nTest Steps: Test steps includes the following payload as a json format in body\r\nMethod: POST\r\n{\r\n\"phone_number\": \"\",\r\n\"company_id\": 377,\r\n\"iso_code\": \"US\",\r\n\"first_name\":\"\",\r\n\"last_name\":\"C\",\r\n\"nid\":\"235478954\",\r\n\"designation\":\"QA Field\",\r\n\"department\":\"Tech\"\r\n}\r\nExpected Result:\r\n{\r\n    \"message\": [\r\n        \"phone_number must be non-empty\",\r\n        \"first_name must be non-empty\"\r\n    ],\r\n    \"status\": \"failed\"\r\n}\r\n\r\nActual Result:\r\n{\r\n    \"message\": [\r\n        \"phone_number must be non-empty\",\r\n        \"first_name must be non-empty\"\r\n    ],\r\n    \"status\": \"failed\"\r\n}\r\n\r\nStatus Code: 403 forbidden\r\nTest Result: Pass"
+					},
+					"response": []
+				},
+				{
+					"name": "FFME2-12.1.6_negativeTest_register_app_user_without phone number & lastname",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "5bc37e83-8caa-4648-bfd2-4a2eb07669a4",
+								"exec": [
+									"pm.test(\"Status code is 403\", function () {\r",
+									"    pm.response.to.have.status(403);\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Response time is less than 600ms\", function () {\r",
+									"    pm.expect(pm.response.responseTime).to.be.below(600);\r",
+									"});\r",
+									"var jsonData = JSON.parse(responseBody);\r",
+									"var schema=\r",
+									"{\r",
+									"    \"$schema\": \"http://json-schema.org/draft-07/schema\",\r",
+									"    \"$id\": \"http://example.com/example.json\",\r",
+									"    \"type\": \"object\",\r",
+									"    \"title\": \"The root schema\",\r",
+									"    \"description\": \"The root schema comprises the entire JSON document.\",\r",
+									"    \"default\": {},\r",
+									"    \"examples\": [\r",
+									"        {\r",
+									"            \"message\": [\r",
+									"                \"phone_number must be non-empty\"\r",
+									"            ],\r",
+									"            \"status\": \"failed\"\r",
+									"        }\r",
+									"    ],\r",
+									"    \"required\": [\r",
+									"        \"message\",\r",
+									"        \"status\"\r",
+									"    ],\r",
+									"    \"properties\": {\r",
+									"        \"message\": {\r",
+									"            \"$id\": \"#/properties/message\",\r",
+									"            \"type\": \"array\",\r",
+									"            \"title\": \"The message schema\",\r",
+									"            \"description\": \"An explanation about the purpose of this instance.\",\r",
+									"            \"default\": [],\r",
+									"            \"examples\": [\r",
+									"                [\r",
+									"                    \"phone_number must be non-empty\"\r",
+									"                ]\r",
+									"            ],\r",
+									"            \"additionalItems\": true,\r",
+									"            \"items\": {\r",
+									"                \"$id\": \"#/properties/message/items\",\r",
+									"                \"anyOf\": [\r",
+									"                    {\r",
+									"                        \"$id\": \"#/properties/message/items/anyOf/0\",\r",
+									"                        \"type\": \"string\",\r",
+									"                        \"title\": \"The first anyOf schema\",\r",
+									"                        \"description\": \"An explanation about the purpose of this instance.\",\r",
+									"                        \"default\": \"\",\r",
+									"                        \"examples\": [\r",
+									"                            \"phone_number must be non-empty\"\r",
+									"                        ]\r",
+									"                    }\r",
+									"                ]\r",
+									"            }\r",
+									"        },\r",
+									"        \"status\": {\r",
+									"            \"$id\": \"#/properties/status\",\r",
+									"            \"type\": \"string\",\r",
+									"            \"title\": \"The status schema\",\r",
+									"            \"description\": \"An explanation about the purpose of this instance.\",\r",
+									"            \"default\": \"\",\r",
+									"            \"examples\": [\r",
+									"                \"failed\"\r",
+									"            ]\r",
+									"        }\r",
+									"    },\r",
+									"    \"additionalProperties\": true\r",
+									"}\r",
+									"tests[\"valid schema\"] = tv4.validate(jsonData, schema);"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{Token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n\"phone_number\": \"\",\r\n\"company_id\":\"377\",\r\n\"iso_code\": \"US\",\r\n\"first_name\":\"Duha\",\r\n\"last_name\":\"\",\r\n\"nid\":\"235478954\",\r\n\"designation\":\"QA Field\",\r\n\"department\":\"Tech\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{URL}}/api/v1/field-force/auth/register-user",
+							"host": [
+								"{{URL}}"
+							],
+							"path": [
+								"api",
+								"v1",
+								"field-force",
+								"auth",
+								"register-user"
+							]
+						},
+						"description": "Objective:Company admin should not be able to register app user without any phone number & iso code\r\nSE: Shiblu Ahmed\r\nPO: Pranto Majumder\r\nQA: Duha Chowdhury\r\nReviewer:Pranto Majumder\r\nTest Steps: Test steps includes the following payload as a json format in body\r\nMethod: POST\r\n{\r\n\"phone_number\": \"\",\r\n\"company_id\": 377,\r\n\"iso_code\": \"US\",\r\n\"first_name\":\"Duha\",\r\n\"last_name\":\"\",\r\n\"nid\":\"235478954\",\r\n\"designation\":\"QA Field\",\r\n\"department\":\"Tech\"\r\n}\r\nExpected Result:\r\n{\r\n    \"message\": [\r\n        \"phone_number must be non-empty\",\r\n        \"last_name must be non-empty\"\r\n    ],\r\n    \"status\": \"failed\"\r\n}\r\n\r\nActual Result:\r\n{\r\n    \"message\": [\r\n        \"phone_number must be non-empty\",\r\n        \"last_name must be non-empty\"\r\n    ],\r\n    \"status\": \"failed\"\r\n}\r\n\r\nStatus Code: 403 forbidden\r\nTest Result: Pass"
+					},
+					"response": []
+				},
+				{
+					"name": "FFME2-12.1.7_negativeTest_register_app_user_without phone number & lastname Copy",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "b481f435-708d-4258-aae9-8aa36f9da486",
+								"exec": [
+									"pm.test(\"Status code is 403\", function () {\r",
+									"    pm.response.to.have.status(403);\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Response time is less than 600ms\", function () {\r",
+									"    pm.expect(pm.response.responseTime).to.be.below(600);\r",
+									"});\r",
+									"var jsonData = JSON.parse(responseBody);\r",
+									"var schema=\r",
+									"{\r",
+									"    \"$schema\": \"http://json-schema.org/draft-07/schema\",\r",
+									"    \"$id\": \"http://example.com/example.json\",\r",
+									"    \"type\": \"object\",\r",
+									"    \"title\": \"The root schema\",\r",
+									"    \"description\": \"The root schema comprises the entire JSON document.\",\r",
+									"    \"default\": {},\r",
+									"    \"examples\": [\r",
+									"        {\r",
+									"            \"message\": [\r",
+									"                \"phone_number must be non-empty\"\r",
+									"            ],\r",
+									"            \"status\": \"failed\"\r",
+									"        }\r",
+									"    ],\r",
+									"    \"required\": [\r",
+									"        \"message\",\r",
+									"        \"status\"\r",
+									"    ],\r",
+									"    \"properties\": {\r",
+									"        \"message\": {\r",
+									"            \"$id\": \"#/properties/message\",\r",
+									"            \"type\": \"array\",\r",
+									"            \"title\": \"The message schema\",\r",
+									"            \"description\": \"An explanation about the purpose of this instance.\",\r",
+									"            \"default\": [],\r",
+									"            \"examples\": [\r",
+									"                [\r",
+									"                    \"phone_number must be non-empty\"\r",
+									"                ]\r",
+									"            ],\r",
+									"            \"additionalItems\": true,\r",
+									"            \"items\": {\r",
+									"                \"$id\": \"#/properties/message/items\",\r",
+									"                \"anyOf\": [\r",
+									"                    {\r",
+									"                        \"$id\": \"#/properties/message/items/anyOf/0\",\r",
+									"                        \"type\": \"string\",\r",
+									"                        \"title\": \"The first anyOf schema\",\r",
+									"                        \"description\": \"An explanation about the purpose of this instance.\",\r",
+									"                        \"default\": \"\",\r",
+									"                        \"examples\": [\r",
+									"                            \"phone_number must be non-empty\"\r",
+									"                        ]\r",
+									"                    }\r",
+									"                ]\r",
+									"            }\r",
+									"        },\r",
+									"        \"status\": {\r",
+									"            \"$id\": \"#/properties/status\",\r",
+									"            \"type\": \"string\",\r",
+									"            \"title\": \"The status schema\",\r",
+									"            \"description\": \"An explanation about the purpose of this instance.\",\r",
+									"            \"default\": \"\",\r",
+									"            \"examples\": [\r",
+									"                \"failed\"\r",
+									"            ]\r",
+									"        }\r",
+									"    },\r",
+									"    \"additionalProperties\": true\r",
+									"}\r",
+									"tests[\"valid schema\"] = tv4.validate(jsonData, schema);"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{Token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n\"phone_number\": \"\",\r\n\"company_id\":\"377\",\r\n\"iso_code\": \"US\",\r\n\"first_name\":\"Duha\",\r\n\"last_name\":\"\",\r\n\"nid\":\"235478954\",\r\n\"designation\":\"QA Field\",\r\n\"department\":\"Tech\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{URL}}/api/v1/field-force/auth/register-user",
+							"host": [
+								"{{URL}}"
+							],
+							"path": [
+								"api",
+								"v1",
+								"field-force",
+								"auth",
+								"register-user"
+							]
+						},
+						"description": "Objective:Company admin should not be able to register app user without any phone number & iso code\r\nSE: Shiblu Ahmed\r\nPO: Pranto Majumder\r\nQA: Duha Chowdhury\r\nReviewer:Pranto Majumder\r\nTest Steps: Test steps includes the following payload as a json format in body\r\nMethod: POST\r\n{\r\n\"phone_number\": \"\",\r\n\"company_id\": 377,\r\n\"iso_code\": \"US\",\r\n\"first_name\":\"Duha\",\r\n\"last_name\":\"\",\r\n\"nid\":\"235478954\",\r\n\"designation\":\"QA Field\",\r\n\"department\":\"Tech\"\r\n}\r\nExpected Result:\r\n{\r\n    \"message\": [\r\n        \"phone_number must be non-empty\",\r\n        \"last_name must be non-empty\"\r\n    ],\r\n    \"status\": \"failed\"\r\n}\r\n\r\nActual Result:\r\n{\r\n    \"message\": [\r\n        \"phone_number must be non-empty\",\r\n        \"last_name must be non-empty\"\r\n    ],\r\n    \"status\": \"failed\"\r\n}\r\n\r\nStatus Code: 403 forbidden\r\nTest Result: Pass"
+					},
+					"response": []
+				},
+				{
+					"name": "FFME2-12.1.8_negativeTest_register_app_user_without phone number & nid number",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "82f0430f-fcf5-473a-9c49-35756a385cdc",
+								"exec": [
+									"pm.test(\"Status code is 403\", function () {\r",
+									"    pm.response.to.have.status(403);\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Response time is less than 600ms\", function () {\r",
+									"    pm.expect(pm.response.responseTime).to.be.below(600);\r",
+									"});\r",
+									"var jsonData = JSON.parse(responseBody);\r",
+									"var schema=\r",
+									"{\r",
+									"    \"$schema\": \"http://json-schema.org/draft-07/schema\",\r",
+									"    \"$id\": \"http://example.com/example.json\",\r",
+									"    \"type\": \"object\",\r",
+									"    \"title\": \"The root schema\",\r",
+									"    \"description\": \"The root schema comprises the entire JSON document.\",\r",
+									"    \"default\": {},\r",
+									"    \"examples\": [\r",
+									"        {\r",
+									"            \"message\": [\r",
+									"                \"phone_number must be non-empty\"\r",
+									"            ],\r",
+									"            \"status\": \"failed\"\r",
+									"        }\r",
+									"    ],\r",
+									"    \"required\": [\r",
+									"        \"message\",\r",
+									"        \"status\"\r",
+									"    ],\r",
+									"    \"properties\": {\r",
+									"        \"message\": {\r",
+									"            \"$id\": \"#/properties/message\",\r",
+									"            \"type\": \"array\",\r",
+									"            \"title\": \"The message schema\",\r",
+									"            \"description\": \"An explanation about the purpose of this instance.\",\r",
+									"            \"default\": [],\r",
+									"            \"examples\": [\r",
+									"                [\r",
+									"                    \"phone_number must be non-empty\"\r",
+									"                ]\r",
+									"            ],\r",
+									"            \"additionalItems\": true,\r",
+									"            \"items\": {\r",
+									"                \"$id\": \"#/properties/message/items\",\r",
+									"                \"anyOf\": [\r",
+									"                    {\r",
+									"                        \"$id\": \"#/properties/message/items/anyOf/0\",\r",
+									"                        \"type\": \"string\",\r",
+									"                        \"title\": \"The first anyOf schema\",\r",
+									"                        \"description\": \"An explanation about the purpose of this instance.\",\r",
+									"                        \"default\": \"\",\r",
+									"                        \"examples\": [\r",
+									"                            \"phone_number must be non-empty\"\r",
+									"                        ]\r",
+									"                    }\r",
+									"                ]\r",
+									"            }\r",
+									"        },\r",
+									"        \"status\": {\r",
+									"            \"$id\": \"#/properties/status\",\r",
+									"            \"type\": \"string\",\r",
+									"            \"title\": \"The status schema\",\r",
+									"            \"description\": \"An explanation about the purpose of this instance.\",\r",
+									"            \"default\": \"\",\r",
+									"            \"examples\": [\r",
+									"                \"failed\"\r",
+									"            ]\r",
+									"        }\r",
+									"    },\r",
+									"    \"additionalProperties\": true\r",
+									"}\r",
+									"tests[\"valid schema\"] = tv4.validate(jsonData, schema);"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{Token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n\"phone_number\": \"\",\r\n\"company_id\":\"377\",\r\n\"iso_code\": \"US\",\r\n\"first_name\":\"Duha\",\r\n\"last_name\":\"C\",\r\n\"nid\":\"\",\r\n\"designation\":\"QA Field\",\r\n\"department\":\"Tech\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{URL}}/api/v1/field-force/auth/register-user",
+							"host": [
+								"{{URL}}"
+							],
+							"path": [
+								"api",
+								"v1",
+								"field-force",
+								"auth",
+								"register-user"
+							]
+						},
+						"description": "Objective:Company admin should not be able to register app user without any phone number & nid\r\nSE: Shiblu Ahmed\r\nPO: Pranto Majumder\r\nQA: Duha Chowdhury\r\nReviewer:Pranto Majumder\r\nTest Steps: Test steps includes the following payload as a json format in body\r\nMethod: POST\r\n{\r\n\"phone_number\": \"\",\r\n\"company_id\": 377,\r\n\"iso_code\": \"US\",\r\n\"first_name\":\"Duha\",\r\n\"last_name\":\"C\",\r\n\"nid\":\"\",\r\n\"designation\":\"QA Field\",\r\n\"department\":\"Tech\"\r\n}\r\nExpected Result:\r\n{\r\n    \"message\": [\r\n        \"phone_number must be non-empty\",\r\n        \"nid must be non-empty\"\r\n    ],\r\n    \"status\": \"failed\"\r\n}\r\n\r\nActual Result:\r\n{\r\n    \"message\": [\r\n        \"phone_number must be non-empty\",\r\n        \"nid must be non-empty\"\r\n    ],\r\n    \"status\": \"failed\"\r\n\r\n}\r\n\r\nStatus Code: 403 forbidden\r\nTest Result: Pass"
+					},
+					"response": []
+				},
+				{
+					"name": "FFME2-12.1.9_negativeTest_register_app_user_without phone number & designation",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "aecc4524-8f5a-46f3-b7ca-eea6e79938b2",
+								"exec": [
+									"pm.test(\"Status code is 403\", function () {\r",
+									"    pm.response.to.have.status(403);\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Response time is less than 600ms\", function () {\r",
+									"    pm.expect(pm.response.responseTime).to.be.below(600);\r",
+									"});\r",
+									"var jsonData = JSON.parse(responseBody);\r",
+									"var schema=\r",
+									"{\r",
+									"    \"$schema\": \"http://json-schema.org/draft-07/schema\",\r",
+									"    \"$id\": \"http://example.com/example.json\",\r",
+									"    \"type\": \"object\",\r",
+									"    \"title\": \"The root schema\",\r",
+									"    \"description\": \"The root schema comprises the entire JSON document.\",\r",
+									"    \"default\": {},\r",
+									"    \"examples\": [\r",
+									"        {\r",
+									"            \"message\": [\r",
+									"                \"phone_number must be non-empty\"\r",
+									"            ],\r",
+									"            \"status\": \"failed\"\r",
+									"        }\r",
+									"    ],\r",
+									"    \"required\": [\r",
+									"        \"message\",\r",
+									"        \"status\"\r",
+									"    ],\r",
+									"    \"properties\": {\r",
+									"        \"message\": {\r",
+									"            \"$id\": \"#/properties/message\",\r",
+									"            \"type\": \"array\",\r",
+									"            \"title\": \"The message schema\",\r",
+									"            \"description\": \"An explanation about the purpose of this instance.\",\r",
+									"            \"default\": [],\r",
+									"            \"examples\": [\r",
+									"                [\r",
+									"                    \"phone_number must be non-empty\"\r",
+									"                ]\r",
+									"            ],\r",
+									"            \"additionalItems\": true,\r",
+									"            \"items\": {\r",
+									"                \"$id\": \"#/properties/message/items\",\r",
+									"                \"anyOf\": [\r",
+									"                    {\r",
+									"                        \"$id\": \"#/properties/message/items/anyOf/0\",\r",
+									"                        \"type\": \"string\",\r",
+									"                        \"title\": \"The first anyOf schema\",\r",
+									"                        \"description\": \"An explanation about the purpose of this instance.\",\r",
+									"                        \"default\": \"\",\r",
+									"                        \"examples\": [\r",
+									"                            \"phone_number must be non-empty\"\r",
+									"                        ]\r",
+									"                    }\r",
+									"                ]\r",
+									"            }\r",
+									"        },\r",
+									"        \"status\": {\r",
+									"            \"$id\": \"#/properties/status\",\r",
+									"            \"type\": \"string\",\r",
+									"            \"title\": \"The status schema\",\r",
+									"            \"description\": \"An explanation about the purpose of this instance.\",\r",
+									"            \"default\": \"\",\r",
+									"            \"examples\": [\r",
+									"                \"failed\"\r",
+									"            ]\r",
+									"        }\r",
+									"    },\r",
+									"    \"additionalProperties\": true\r",
+									"}\r",
+									"tests[\"valid schema\"] = tv4.validate(jsonData, schema);"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{Token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n\"phone_number\": \"\",\r\n\"company_id\":\"377\",\r\n\"iso_code\": \"US\",\r\n\"first_name\":\"Duha\",\r\n\"last_name\":\"C\",\r\n\"nid\":\"235478954\",\r\n\"designation\":\"\",\r\n\"department\":\"Tech\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{URL}}/api/v1/field-force/auth/register-user",
+							"host": [
+								"{{URL}}"
+							],
+							"path": [
+								"api",
+								"v1",
+								"field-force",
+								"auth",
+								"register-user"
+							]
+						},
+						"description": "Objective:Company admin should not be able to register app user without any phone number & designation\r\nSE: Shiblu Ahmed\r\nPO: Pranto Majumder\r\nQA: Duha Chowdhury\r\nReviewer:Pranto Majumder\r\nTest Steps: Test steps includes the following payload as a json format in body\r\nMethod: POST\r\n{\r\n\"phone_number\": \"\",\r\n\"company_id\": 377,\r\n\"iso_code\": \"US\",\r\n\"first_name\":\"Duha\",\r\n\"last_name\":\"C\",\r\n\"nid\":\"235478954\",\r\n\"designation\":\"\",\r\n\"department\":\"Tech\"\r\n}\r\nExpected Result:\r\n{\r\n    \"message\": [\r\n        \"phone_number must be non-empty\",\r\n        \"designation must be non-empty\"\r\n    ],\r\n    \"status\": \"failed\"\r\n}\r\n\r\nActual Result:\r\n{\r\n    \"message\": [\r\n        \"phone_number must be non-empty\",\r\n        \"designation must be non-empty\"\r\n    ],\r\n    \"status\": \"failed\"\r\n}\r\n\r\nStatus Code: 403 forbidden\r\nTest Result: Pass"
+					},
+					"response": []
+				},
+				{
+					"name": "FFME2-12.1.10_negativeTest_register_app_user_without phone number & department",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "f084090f-ae74-464a-b313-8ed77d4ed6f8",
+								"exec": [
+									"pm.test(\"Status code is 403\", function () {\r",
+									"    pm.response.to.have.status(403);\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Response time is less than 600ms\", function () {\r",
+									"    pm.expect(pm.response.responseTime).to.be.below(600);\r",
+									"});\r",
+									"var jsonData = JSON.parse(responseBody);\r",
+									"var schema=\r",
+									"{\r",
+									"    \"$schema\": \"http://json-schema.org/draft-07/schema\",\r",
+									"    \"$id\": \"http://example.com/example.json\",\r",
+									"    \"type\": \"object\",\r",
+									"    \"title\": \"The root schema\",\r",
+									"    \"description\": \"The root schema comprises the entire JSON document.\",\r",
+									"    \"default\": {},\r",
+									"    \"examples\": [\r",
+									"        {\r",
+									"            \"message\": [\r",
+									"                \"phone_number must be non-empty\"\r",
+									"            ],\r",
+									"            \"status\": \"failed\"\r",
+									"        }\r",
+									"    ],\r",
+									"    \"required\": [\r",
+									"        \"message\",\r",
+									"        \"status\"\r",
+									"    ],\r",
+									"    \"properties\": {\r",
+									"        \"message\": {\r",
+									"            \"$id\": \"#/properties/message\",\r",
+									"            \"type\": \"array\",\r",
+									"            \"title\": \"The message schema\",\r",
+									"            \"description\": \"An explanation about the purpose of this instance.\",\r",
+									"            \"default\": [],\r",
+									"            \"examples\": [\r",
+									"                [\r",
+									"                    \"phone_number must be non-empty\"\r",
+									"                ]\r",
+									"            ],\r",
+									"            \"additionalItems\": true,\r",
+									"            \"items\": {\r",
+									"                \"$id\": \"#/properties/message/items\",\r",
+									"                \"anyOf\": [\r",
+									"                    {\r",
+									"                        \"$id\": \"#/properties/message/items/anyOf/0\",\r",
+									"                        \"type\": \"string\",\r",
+									"                        \"title\": \"The first anyOf schema\",\r",
+									"                        \"description\": \"An explanation about the purpose of this instance.\",\r",
+									"                        \"default\": \"\",\r",
+									"                        \"examples\": [\r",
+									"                            \"phone_number must be non-empty\"\r",
+									"                        ]\r",
+									"                    }\r",
+									"                ]\r",
+									"            }\r",
+									"        },\r",
+									"        \"status\": {\r",
+									"            \"$id\": \"#/properties/status\",\r",
+									"            \"type\": \"string\",\r",
+									"            \"title\": \"The status schema\",\r",
+									"            \"description\": \"An explanation about the purpose of this instance.\",\r",
+									"            \"default\": \"\",\r",
+									"            \"examples\": [\r",
+									"                \"failed\"\r",
+									"            ]\r",
+									"        }\r",
+									"    },\r",
+									"    \"additionalProperties\": true\r",
+									"}\r",
+									"tests[\"valid schema\"] = tv4.validate(jsonData, schema);"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{Token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n\"phone_number\": \"\",\r\n\"company_id\":\"377\",\r\n\"iso_code\": \"US\",\r\n\"first_name\":\"Duha\",\r\n\"last_name\":\"C\",\r\n\"nid\":\"235478954\",\r\n\"designation\":\"QA Field\",\r\n\"department\":\"\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{URL}}/api/v1/field-force/auth/register-user",
+							"host": [
+								"{{URL}}"
+							],
+							"path": [
+								"api",
+								"v1",
+								"field-force",
+								"auth",
+								"register-user"
+							]
+						},
+						"description": "Objective:Company admin should not be able to register app user without any phone number & department\r\nSE: Shiblu Ahmed\r\nPO: Pranto Majumder\r\nQA: Duha Chowdhury\r\nReviewer:Pranto Majumder\r\nTest Steps: Test steps includes the following payload as a json format in body\r\nMethod: POST\r\n{\r\n\"phone_number\": \"\",\r\n\"company_id\": 377,\r\n\"iso_code\": \"US\",\r\n\"first_name\":\"Duha\",\r\n\"last_name\":\"C\",\r\n\"nid\":\"235478954\",\r\n\"designation\":\"\",\r\n\"department\":\"\"\r\n}\r\nExpected Result:\r\n{\r\n    \"message\": [\r\n        \"phone_number must be non-empty\",\r\n        \"department must be non-empty\"\r\n    ],\r\n    \"status\": \"failed\"\r\n}\r\n\r\nActual Result:\r\n{\r\n    \"message\": [\r\n        \"phone_number must be non-empty\",\r\n        \"department must be non-empty\"\r\n    ],\r\n    \"status\": \"failed\"\r\n}\r\n\r\nStatus Code: 403 forbidden\r\nTest Result: Pass"
+					},
+					"response": []
+				},
+				{
+					"name": "FFME2-12.1.11_negativeTest_register_app_user_without company id",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "a07a9bad-0d82-44e0-acc4-7e426cd60aa3",
+								"exec": [
+									"pm.test(\"Status code is 403\", function () {\r",
+									"    pm.response.to.have.status(403);\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Response time is less than 600ms\", function () {\r",
+									"    pm.expect(pm.response.responseTime).to.be.below(600);\r",
+									"});\r",
+									"var jsonData = JSON.parse(responseBody);\r",
+									"var schema=\r",
+									"{\r",
+									"    \"$schema\": \"http://json-schema.org/draft-07/schema\",\r",
+									"    \"$id\": \"http://example.com/example.json\",\r",
+									"    \"type\": \"object\",\r",
+									"    \"title\": \"The root schema\",\r",
+									"    \"description\": \"The root schema comprises the entire JSON document.\",\r",
+									"    \"default\": {},\r",
+									"    \"examples\": [\r",
+									"        {\r",
+									"            \"message\": [\r",
+									"                \"phone_number must be non-empty\"\r",
+									"            ],\r",
+									"            \"status\": \"failed\"\r",
+									"        }\r",
+									"    ],\r",
+									"    \"required\": [\r",
+									"        \"message\",\r",
+									"        \"status\"\r",
+									"    ],\r",
+									"    \"properties\": {\r",
+									"        \"message\": {\r",
+									"            \"$id\": \"#/properties/message\",\r",
+									"            \"type\": \"array\",\r",
+									"            \"title\": \"The message schema\",\r",
+									"            \"description\": \"An explanation about the purpose of this instance.\",\r",
+									"            \"default\": [],\r",
+									"            \"examples\": [\r",
+									"                [\r",
+									"                    \"phone_number must be non-empty\"\r",
+									"                ]\r",
+									"            ],\r",
+									"            \"additionalItems\": true,\r",
+									"            \"items\": {\r",
+									"                \"$id\": \"#/properties/message/items\",\r",
+									"                \"anyOf\": [\r",
+									"                    {\r",
+									"                        \"$id\": \"#/properties/message/items/anyOf/0\",\r",
+									"                        \"type\": \"string\",\r",
+									"                        \"title\": \"The first anyOf schema\",\r",
+									"                        \"description\": \"An explanation about the purpose of this instance.\",\r",
+									"                        \"default\": \"\",\r",
+									"                        \"examples\": [\r",
+									"                            \"phone_number must be non-empty\"\r",
+									"                        ]\r",
+									"                    }\r",
+									"                ]\r",
+									"            }\r",
+									"        },\r",
+									"        \"status\": {\r",
+									"            \"$id\": \"#/properties/status\",\r",
+									"            \"type\": \"string\",\r",
+									"            \"title\": \"The status schema\",\r",
+									"            \"description\": \"An explanation about the purpose of this instance.\",\r",
+									"            \"default\": \"\",\r",
+									"            \"examples\": [\r",
+									"                \"failed\"\r",
+									"            ]\r",
+									"        }\r",
+									"    },\r",
+									"    \"additionalProperties\": true\r",
+									"}\r",
+									"tests[\"valid schema\"] = tv4.validate(jsonData, schema);"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{Token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n\"phone_number\": \"3477416666\",\r\n\"company_id\":\"\",\r\n\"iso_code\": \"US\",\r\n\"first_name\":\"Duha\",\r\n\"last_name\":\"C\",\r\n\"nid\":\"235478954\",\r\n\"designation\":\"QA Field\",\r\n\"department\":\"Tech\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{URL}}/api/v1/field-force/auth/register-user",
+							"host": [
+								"{{URL}}"
+							],
+							"path": [
+								"api",
+								"v1",
+								"field-force",
+								"auth",
+								"register-user"
+							]
+						},
+						"description": "Objective:Company admin should not be able to register app user without company id\r\nSE: Shiblu Ahmed\r\nPO: Pranto Majumder\r\nQA: Duha Chowdhury\r\nReviewer:Pranto Majumder\r\nTest Steps: Test steps includes the following payload as a json format in body\r\nMethod: POST\r\n{\r\n\"phone_number\": \"3477416666\",\r\n\"company_id\": ,\r\n\"iso_code\": \"US\",\r\n\"first_name\":\"Duha\",\r\n\"last_name\":\"C\",\r\n\"nid\":\"235478954\",\r\n\"designation\":\"QA Field\",\r\n\"department\":\"Tech\"\r\n}\r\nExpected Result:\r\n{\r\n    \"message\": [\r\n        \"company_id must be non-empty\"\r\n    ],\r\n    \"status\": \"failed\"\r\n}\r\n\r\nActual Result:\r\n{\r\n    \"message\": [\r\n        \"company_id must be non-empty\"\r\n    ],\r\n    \"status\": \"failed\"\r\n}\r\n\r\nStatus Code: 403 forbidden\r\nTest Result: Pass"
+					},
+					"response": []
+				},
+				{
+					"name": "FFME2-12.1.12_negativeTest_register_app_user_without iso code",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "2dacd138-956f-49dd-bdc8-085ad944e9c5",
+								"exec": [
+									"pm.test(\"Status code is 403\", function () {\r",
+									"    pm.response.to.have.status(403);\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Response time is less than 600ms\", function () {\r",
+									"    pm.expect(pm.response.responseTime).to.be.below(600);\r",
+									"});\r",
+									"var jsonData = JSON.parse(responseBody);\r",
+									"var schema=\r",
+									"{\r",
+									"    \"$schema\": \"http://json-schema.org/draft-07/schema\",\r",
+									"    \"$id\": \"http://example.com/example.json\",\r",
+									"    \"type\": \"object\",\r",
+									"    \"title\": \"The root schema\",\r",
+									"    \"description\": \"The root schema comprises the entire JSON document.\",\r",
+									"    \"default\": {},\r",
+									"    \"examples\": [\r",
+									"        {\r",
+									"            \"message\": [\r",
+									"                \"phone_number must be non-empty\"\r",
+									"            ],\r",
+									"            \"status\": \"failed\"\r",
+									"        }\r",
+									"    ],\r",
+									"    \"required\": [\r",
+									"        \"message\",\r",
+									"        \"status\"\r",
+									"    ],\r",
+									"    \"properties\": {\r",
+									"        \"message\": {\r",
+									"            \"$id\": \"#/properties/message\",\r",
+									"            \"type\": \"array\",\r",
+									"            \"title\": \"The message schema\",\r",
+									"            \"description\": \"An explanation about the purpose of this instance.\",\r",
+									"            \"default\": [],\r",
+									"            \"examples\": [\r",
+									"                [\r",
+									"                    \"phone_number must be non-empty\"\r",
+									"                ]\r",
+									"            ],\r",
+									"            \"additionalItems\": true,\r",
+									"            \"items\": {\r",
+									"                \"$id\": \"#/properties/message/items\",\r",
+									"                \"anyOf\": [\r",
+									"                    {\r",
+									"                        \"$id\": \"#/properties/message/items/anyOf/0\",\r",
+									"                        \"type\": \"string\",\r",
+									"                        \"title\": \"The first anyOf schema\",\r",
+									"                        \"description\": \"An explanation about the purpose of this instance.\",\r",
+									"                        \"default\": \"\",\r",
+									"                        \"examples\": [\r",
+									"                            \"phone_number must be non-empty\"\r",
+									"                        ]\r",
+									"                    }\r",
+									"                ]\r",
+									"            }\r",
+									"        },\r",
+									"        \"status\": {\r",
+									"            \"$id\": \"#/properties/status\",\r",
+									"            \"type\": \"string\",\r",
+									"            \"title\": \"The status schema\",\r",
+									"            \"description\": \"An explanation about the purpose of this instance.\",\r",
+									"            \"default\": \"\",\r",
+									"            \"examples\": [\r",
+									"                \"failed\"\r",
+									"            ]\r",
+									"        }\r",
+									"    },\r",
+									"    \"additionalProperties\": true\r",
+									"}\r",
+									"tests[\"valid schema\"] = tv4.validate(jsonData, schema);"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{Token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n\"phone_number\": \"3477416666\",\r\n\"company_id\":\"377\",\r\n\"iso_code\": \"\",\r\n\"first_name\":\"Duha\",\r\n\"last_name\":\"C\",\r\n\"nid\":\"235478954\",\r\n\"designation\":\"QA Field\",\r\n\"department\":\"Tech\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{URL}}/api/v1/field-force/auth/register-user",
+							"host": [
+								"{{URL}}"
+							],
+							"path": [
+								"api",
+								"v1",
+								"field-force",
+								"auth",
+								"register-user"
+							]
+						},
+						"description": "Objective:Company admin should not be able to register app user without iso code\r\nSE: Shiblu Ahmed\r\nPO: Pranto Majumder\r\nQA: Duha Chowdhury\r\nReviewer:Pranto Majumder\r\nTest Steps: Test steps includes the following payload as a json format in body\r\nMethod: POST\r\n{\r\n\"phone_number\": \"3477416666\",\r\n\"company_id\":377 ,\r\n\"iso_code\": \"\",\r\n\"first_name\":\"Duha\",\r\n\"last_name\":\"C\",\r\n\"nid\":\"235478954\",\r\n\"designation\":\"QA Field\",\r\n\"department\":\"Tech\"\r\n}\r\nExpected Result:\r\n{\r\n    \"message\": [\r\n        \"iso_code must be non-empty\"\r\n    ],\r\n    \"status\": \"failed\"\r\n}\r\n\r\nActual Result:\r\n{\r\n    \"message\": [\r\n        \"iso_code must be non-empty\"\r\n    ],\r\n    \"status\": \"failed\"\r\n}\r\n\r\nStatus Code: 403 forbidden\r\nTest Result: Pass"
+					},
+					"response": []
+				},
+				{
+					"name": "FFME2-12.1.13_negativeTest_register_app_user_without first name",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "e6020945-27b2-4d13-a491-f891fa36d54a",
+								"exec": [
+									"pm.test(\"Status code is 403\", function () {\r",
+									"    pm.response.to.have.status(403);\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Response time is less than 600ms\", function () {\r",
+									"    pm.expect(pm.response.responseTime).to.be.below(600);\r",
+									"});\r",
+									"var jsonData = JSON.parse(responseBody);\r",
+									"var schema=\r",
+									"{\r",
+									"    \"$schema\": \"http://json-schema.org/draft-07/schema\",\r",
+									"    \"$id\": \"http://example.com/example.json\",\r",
+									"    \"type\": \"object\",\r",
+									"    \"title\": \"The root schema\",\r",
+									"    \"description\": \"The root schema comprises the entire JSON document.\",\r",
+									"    \"default\": {},\r",
+									"    \"examples\": [\r",
+									"        {\r",
+									"            \"message\": [\r",
+									"                \"phone_number must be non-empty\"\r",
+									"            ],\r",
+									"            \"status\": \"failed\"\r",
+									"        }\r",
+									"    ],\r",
+									"    \"required\": [\r",
+									"        \"message\",\r",
+									"        \"status\"\r",
+									"    ],\r",
+									"    \"properties\": {\r",
+									"        \"message\": {\r",
+									"            \"$id\": \"#/properties/message\",\r",
+									"            \"type\": \"array\",\r",
+									"            \"title\": \"The message schema\",\r",
+									"            \"description\": \"An explanation about the purpose of this instance.\",\r",
+									"            \"default\": [],\r",
+									"            \"examples\": [\r",
+									"                [\r",
+									"                    \"phone_number must be non-empty\"\r",
+									"                ]\r",
+									"            ],\r",
+									"            \"additionalItems\": true,\r",
+									"            \"items\": {\r",
+									"                \"$id\": \"#/properties/message/items\",\r",
+									"                \"anyOf\": [\r",
+									"                    {\r",
+									"                        \"$id\": \"#/properties/message/items/anyOf/0\",\r",
+									"                        \"type\": \"string\",\r",
+									"                        \"title\": \"The first anyOf schema\",\r",
+									"                        \"description\": \"An explanation about the purpose of this instance.\",\r",
+									"                        \"default\": \"\",\r",
+									"                        \"examples\": [\r",
+									"                            \"phone_number must be non-empty\"\r",
+									"                        ]\r",
+									"                    }\r",
+									"                ]\r",
+									"            }\r",
+									"        },\r",
+									"        \"status\": {\r",
+									"            \"$id\": \"#/properties/status\",\r",
+									"            \"type\": \"string\",\r",
+									"            \"title\": \"The status schema\",\r",
+									"            \"description\": \"An explanation about the purpose of this instance.\",\r",
+									"            \"default\": \"\",\r",
+									"            \"examples\": [\r",
+									"                \"failed\"\r",
+									"            ]\r",
+									"        }\r",
+									"    },\r",
+									"    \"additionalProperties\": true\r",
+									"}\r",
+									"tests[\"valid schema\"] = tv4.validate(jsonData, schema);"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{Token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n\"phone_number\": \"3477416666\",\r\n\"company_id\":\"377\",\r\n\"iso_code\": \"US\",\r\n\"first_name\":\"\",\r\n\"last_name\":\"C\",\r\n\"nid\":\"235478954\",\r\n\"designation\":\"QA Field\",\r\n\"department\":\"Tech\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{URL}}/api/v1/field-force/auth/register-user",
+							"host": [
+								"{{URL}}"
+							],
+							"path": [
+								"api",
+								"v1",
+								"field-force",
+								"auth",
+								"register-user"
+							]
+						},
+						"description": "Objective:Company admin should not be able to register app user without first name\r\nSE: Shiblu Ahmed\r\nPO: Pranto Majumder\r\nQA: Duha Chowdhury\r\nReviewer:Pranto Majumder\r\nTest Steps: Test steps includes the following payload as a json format in body\r\nMethod: POST\r\n{\r\n\"phone_number\": \"3477416666\",\r\n\"company_id\":377 ,\r\n\"iso_code\": \"US\",\r\n\"first_name\":\"\",\r\n\"last_name\":\"C\",\r\n\"nid\":\"235478954\",\r\n\"designation\":\"QA Field\",\r\n\"department\":\"Tech\"\r\n}\r\nExpected Result:\r\n{\r\n    \"message\": [\r\n        \"first_name must be non-empty\"\r\n    ],\r\n    \"status\": \"failed\"\r\n}\r\n\r\nActual Result:\r\n{\r\n    \"message\": [\r\n        \"first_name must be non-empty\"\r\n    ],\r\n    \"status\": \"failed\"\r\n}\r\n\r\nStatus Code: 403 forbidden\r\nTest Result: Pass"
+					},
+					"response": []
+				},
+				{
+					"name": "FFME2-12.1.14_negativeTest_register_app_user_without lastname",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "e12d7e49-1167-4764-970c-cc816e411460",
+								"exec": [
+									"pm.test(\"Status code is 403\", function () {\r",
+									"    pm.response.to.have.status(403);\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Response time is less than 600ms\", function () {\r",
+									"    pm.expect(pm.response.responseTime).to.be.below(600);\r",
+									"});\r",
+									"var jsonData = JSON.parse(responseBody);\r",
+									"var schema=\r",
+									"{\r",
+									"    \"$schema\": \"http://json-schema.org/draft-07/schema\",\r",
+									"    \"$id\": \"http://example.com/example.json\",\r",
+									"    \"type\": \"object\",\r",
+									"    \"title\": \"The root schema\",\r",
+									"    \"description\": \"The root schema comprises the entire JSON document.\",\r",
+									"    \"default\": {},\r",
+									"    \"examples\": [\r",
+									"        {\r",
+									"            \"message\": [\r",
+									"                \"phone_number must be non-empty\"\r",
+									"            ],\r",
+									"            \"status\": \"failed\"\r",
+									"        }\r",
+									"    ],\r",
+									"    \"required\": [\r",
+									"        \"message\",\r",
+									"        \"status\"\r",
+									"    ],\r",
+									"    \"properties\": {\r",
+									"        \"message\": {\r",
+									"            \"$id\": \"#/properties/message\",\r",
+									"            \"type\": \"array\",\r",
+									"            \"title\": \"The message schema\",\r",
+									"            \"description\": \"An explanation about the purpose of this instance.\",\r",
+									"            \"default\": [],\r",
+									"            \"examples\": [\r",
+									"                [\r",
+									"                    \"phone_number must be non-empty\"\r",
+									"                ]\r",
+									"            ],\r",
+									"            \"additionalItems\": true,\r",
+									"            \"items\": {\r",
+									"                \"$id\": \"#/properties/message/items\",\r",
+									"                \"anyOf\": [\r",
+									"                    {\r",
+									"                        \"$id\": \"#/properties/message/items/anyOf/0\",\r",
+									"                        \"type\": \"string\",\r",
+									"                        \"title\": \"The first anyOf schema\",\r",
+									"                        \"description\": \"An explanation about the purpose of this instance.\",\r",
+									"                        \"default\": \"\",\r",
+									"                        \"examples\": [\r",
+									"                            \"phone_number must be non-empty\"\r",
+									"                        ]\r",
+									"                    }\r",
+									"                ]\r",
+									"            }\r",
+									"        },\r",
+									"        \"status\": {\r",
+									"            \"$id\": \"#/properties/status\",\r",
+									"            \"type\": \"string\",\r",
+									"            \"title\": \"The status schema\",\r",
+									"            \"description\": \"An explanation about the purpose of this instance.\",\r",
+									"            \"default\": \"\",\r",
+									"            \"examples\": [\r",
+									"                \"failed\"\r",
+									"            ]\r",
+									"        }\r",
+									"    },\r",
+									"    \"additionalProperties\": true\r",
+									"}\r",
+									"tests[\"valid schema\"] = tv4.validate(jsonData, schema);"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{Token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n\"phone_number\": \"3477416666\",\r\n\"company_id\":\"377\",\r\n\"iso_code\": \"US\",\r\n\"first_name\":\"Duha\",\r\n\"last_name\":\"\",\r\n\"nid\":\"235478954\",\r\n\"designation\":\"QA Field\",\r\n\"department\":\"Tech\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{URL}}/api/v1/field-force/auth/register-user",
+							"host": [
+								"{{URL}}"
+							],
+							"path": [
+								"api",
+								"v1",
+								"field-force",
+								"auth",
+								"register-user"
+							]
+						},
+						"description": "Objective:Company admin should not be able to register app user without last name\r\nSE: Shiblu Ahmed\r\nPO: Pranto Majumder\r\nQA: Duha Chowdhury\r\nReviewer:Pranto Majumder\r\nTest Steps: Test steps includes the following payload as a json format in body\r\nMethod: POST\r\n{\r\n\"phone_number\": \"3477416666\",\r\n\"company_id\":377 ,\r\n\"iso_code\": \"US\",\r\n\"first_name\":\"\",\r\n\"last_name\":\"C\",\r\n\"nid\":\"235478954\",\r\n\"designation\":\"QA Field\",\r\n\"department\":\"Tech\"\r\n}\r\nExpected Result:\r\n{\r\n    \"message\": [\r\n        \"last_name must be non-empty\"\r\n    ],\r\n    \"status\": \"failed\"\r\n}\r\n\r\nActual Result:\r\n{\r\n    \"message\": [\r\n        \"last_name must be non-empty\"\r\n    ],\r\n    \"status\": \"failed\"\r\n}\r\n\r\nStatus Code: 403 forbidden\r\nTest Result: Pass"
+					},
+					"response": []
+				},
+				{
+					"name": "FFME2-12.1.15_negativeTest_register_app_user_without nid",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "03c3a3c7-1c6c-4fd1-a40f-ef2114a22801",
+								"exec": [
+									"pm.test(\"Status code is 403\", function () {\r",
+									"    pm.response.to.have.status(403);\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Response time is less than 600ms\", function () {\r",
+									"    pm.expect(pm.response.responseTime).to.be.below(600);\r",
+									"});\r",
+									"var jsonData = JSON.parse(responseBody);\r",
+									"var schema=\r",
+									"{\r",
+									"    \"$schema\": \"http://json-schema.org/draft-07/schema\",\r",
+									"    \"$id\": \"http://example.com/example.json\",\r",
+									"    \"type\": \"object\",\r",
+									"    \"title\": \"The root schema\",\r",
+									"    \"description\": \"The root schema comprises the entire JSON document.\",\r",
+									"    \"default\": {},\r",
+									"    \"examples\": [\r",
+									"        {\r",
+									"            \"message\": [\r",
+									"                \"phone_number must be non-empty\"\r",
+									"            ],\r",
+									"            \"status\": \"failed\"\r",
+									"        }\r",
+									"    ],\r",
+									"    \"required\": [\r",
+									"        \"message\",\r",
+									"        \"status\"\r",
+									"    ],\r",
+									"    \"properties\": {\r",
+									"        \"message\": {\r",
+									"            \"$id\": \"#/properties/message\",\r",
+									"            \"type\": \"array\",\r",
+									"            \"title\": \"The message schema\",\r",
+									"            \"description\": \"An explanation about the purpose of this instance.\",\r",
+									"            \"default\": [],\r",
+									"            \"examples\": [\r",
+									"                [\r",
+									"                    \"phone_number must be non-empty\"\r",
+									"                ]\r",
+									"            ],\r",
+									"            \"additionalItems\": true,\r",
+									"            \"items\": {\r",
+									"                \"$id\": \"#/properties/message/items\",\r",
+									"                \"anyOf\": [\r",
+									"                    {\r",
+									"                        \"$id\": \"#/properties/message/items/anyOf/0\",\r",
+									"                        \"type\": \"string\",\r",
+									"                        \"title\": \"The first anyOf schema\",\r",
+									"                        \"description\": \"An explanation about the purpose of this instance.\",\r",
+									"                        \"default\": \"\",\r",
+									"                        \"examples\": [\r",
+									"                            \"phone_number must be non-empty\"\r",
+									"                        ]\r",
+									"                    }\r",
+									"                ]\r",
+									"            }\r",
+									"        },\r",
+									"        \"status\": {\r",
+									"            \"$id\": \"#/properties/status\",\r",
+									"            \"type\": \"string\",\r",
+									"            \"title\": \"The status schema\",\r",
+									"            \"description\": \"An explanation about the purpose of this instance.\",\r",
+									"            \"default\": \"\",\r",
+									"            \"examples\": [\r",
+									"                \"failed\"\r",
+									"            ]\r",
+									"        }\r",
+									"    },\r",
+									"    \"additionalProperties\": true\r",
+									"}\r",
+									"tests[\"valid schema\"] = tv4.validate(jsonData, schema);"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{Token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n\"phone_number\": \"3477416666\",\r\n\"company_id\":\"377\",\r\n\"iso_code\": \"US\",\r\n\"first_name\":\"Duha\",\r\n\"last_name\":\"C\",\r\n\"nid\":\"\",\r\n\"designation\":\"QA Field\",\r\n\"department\":\"Tech\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{URL}}/api/v1/field-force/auth/register-user",
+							"host": [
+								"{{URL}}"
+							],
+							"path": [
+								"api",
+								"v1",
+								"field-force",
+								"auth",
+								"register-user"
+							]
+						},
+						"description": "Objective:Company admin should not be able to register app user without nid\r\nSE: Shiblu Ahmed\r\nPO: Pranto Majumder\r\nQA: Duha Chowdhury\r\nReviewer:Pranto Majumder\r\nTest Steps: Test steps includes the following payload as a json format in body\r\nMethod: POST\r\n{\r\n\"phone_number\": \"3477416666\",\r\n\"company_id\":377 ,\r\n\"iso_code\": \"US\",\r\n\"first_name\":\"Duha\",\r\n\"last_name\":\"C\",\r\n\"nid\":\"\",\r\n\"designation\":\"QA Field\",\r\n\"department\":\"Tech\"\r\n}\r\nExpected Result:\r\n{\r\n    \"message\": [\r\n        \"first_name must be non-empty\",\r\n        \"nid must be non-empty\"\r\n    ],\r\n    \"status\": \"failed\"\r\n}\r\n\r\nActual Result:\r\n{\r\n    \"message\": [\r\n        \"first_name must be non-empty\",\r\n        \"nid must be non-empty\"\r\n    ],\r\n    \"status\": \"failed\"\r\n}\r\n\r\nStatus Code: 403 forbidden\r\nTest Result: Pass"
+					},
+					"response": []
+				},
+				{
+					"name": "FFME2-12.1.16_negativeTest_register_app_user_without designation",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "5acff699-ec21-4e02-b58e-394a63ffb117",
+								"exec": [
+									"pm.test(\"Status code is 403\", function () {\r",
+									"    pm.response.to.have.status(403);\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Response time is less than 600ms\", function () {\r",
+									"    pm.expect(pm.response.responseTime).to.be.below(600);\r",
+									"});\r",
+									"var jsonData = JSON.parse(responseBody);\r",
+									"var schema=\r",
+									"{\r",
+									"    \"$schema\": \"http://json-schema.org/draft-07/schema\",\r",
+									"    \"$id\": \"http://example.com/example.json\",\r",
+									"    \"type\": \"object\",\r",
+									"    \"title\": \"The root schema\",\r",
+									"    \"description\": \"The root schema comprises the entire JSON document.\",\r",
+									"    \"default\": {},\r",
+									"    \"examples\": [\r",
+									"        {\r",
+									"            \"message\": [\r",
+									"                \"phone_number must be non-empty\"\r",
+									"            ],\r",
+									"            \"status\": \"failed\"\r",
+									"        }\r",
+									"    ],\r",
+									"    \"required\": [\r",
+									"        \"message\",\r",
+									"        \"status\"\r",
+									"    ],\r",
+									"    \"properties\": {\r",
+									"        \"message\": {\r",
+									"            \"$id\": \"#/properties/message\",\r",
+									"            \"type\": \"array\",\r",
+									"            \"title\": \"The message schema\",\r",
+									"            \"description\": \"An explanation about the purpose of this instance.\",\r",
+									"            \"default\": [],\r",
+									"            \"examples\": [\r",
+									"                [\r",
+									"                    \"phone_number must be non-empty\"\r",
+									"                ]\r",
+									"            ],\r",
+									"            \"additionalItems\": true,\r",
+									"            \"items\": {\r",
+									"                \"$id\": \"#/properties/message/items\",\r",
+									"                \"anyOf\": [\r",
+									"                    {\r",
+									"                        \"$id\": \"#/properties/message/items/anyOf/0\",\r",
+									"                        \"type\": \"string\",\r",
+									"                        \"title\": \"The first anyOf schema\",\r",
+									"                        \"description\": \"An explanation about the purpose of this instance.\",\r",
+									"                        \"default\": \"\",\r",
+									"                        \"examples\": [\r",
+									"                            \"phone_number must be non-empty\"\r",
+									"                        ]\r",
+									"                    }\r",
+									"                ]\r",
+									"            }\r",
+									"        },\r",
+									"        \"status\": {\r",
+									"            \"$id\": \"#/properties/status\",\r",
+									"            \"type\": \"string\",\r",
+									"            \"title\": \"The status schema\",\r",
+									"            \"description\": \"An explanation about the purpose of this instance.\",\r",
+									"            \"default\": \"\",\r",
+									"            \"examples\": [\r",
+									"                \"failed\"\r",
+									"            ]\r",
+									"        }\r",
+									"    },\r",
+									"    \"additionalProperties\": true\r",
+									"}\r",
+									"tests[\"valid schema\"] = tv4.validate(jsonData, schema);"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{Token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n\"phone_number\": \"3477416666\",\r\n\"company_id\":\"377\",\r\n\"iso_code\": \"US\",\r\n\"first_name\":\"Duha\",\r\n\"last_name\":\"C\",\r\n\"nid\":\"235478954\",\r\n\"designation\":\"\",\r\n\"department\":\"Tech\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{URL}}/api/v1/field-force/auth/register-user",
+							"host": [
+								"{{URL}}"
+							],
+							"path": [
+								"api",
+								"v1",
+								"field-force",
+								"auth",
+								"register-user"
+							]
+						},
+						"description": "Objective:Company admin should not be able to register app user without designation\r\nSE: Shiblu Ahmed\r\nPO: Pranto Majumder\r\nQA: Duha Chowdhury\r\nReviewer:Pranto Majumder\r\nTest Steps: Test steps includes the following payload as a json format in body\r\nMethod: POST\r\n{\r\n\"phone_number\": \"3477416666\",\r\n\"company_id\":377 ,\r\n\"iso_code\": \"US\",\r\n\"first_name\":\"Duha\",\r\n\"last_name\":\"C\",\r\n\"nid\":\"235478954\",\r\n\"designation\":\"\",\r\n\"department\":\"Tech\"\r\n}\r\nExpected Result:\r\n{\r\n    \"message\": [\r\n        \"designation must be non-empty\"\r\n    ],\r\n    \"status\": \"failed\"\r\n}\r\n\r\nActual Result:\r\n{\r\n    \"message\": [\r\n        \"designation must be non-empty\"\r\n    ],\r\n    \"status\": \"failed\"\r\n}\r\n\r\nStatus Code: 403 forbidden\r\nTest Result: Pass"
+					},
+					"response": []
+				},
+				{
+					"name": "FFME2-12.1.17_negativeTest_register_app_user_without department",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "eb497b21-3bde-4a31-a737-780d939300f3",
+								"exec": [
+									"pm.test(\"Status code is 403\", function () {\r",
+									"    pm.response.to.have.status(403);\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Response time is less than 600ms\", function () {\r",
+									"    pm.expect(pm.response.responseTime).to.be.below(600);\r",
+									"});\r",
+									"var jsonData = JSON.parse(responseBody);\r",
+									"var schema=\r",
+									"{\r",
+									"    \"$schema\": \"http://json-schema.org/draft-07/schema\",\r",
+									"    \"$id\": \"http://example.com/example.json\",\r",
+									"    \"type\": \"object\",\r",
+									"    \"title\": \"The root schema\",\r",
+									"    \"description\": \"The root schema comprises the entire JSON document.\",\r",
+									"    \"default\": {},\r",
+									"    \"examples\": [\r",
+									"        {\r",
+									"            \"message\": [\r",
+									"                \"phone_number must be non-empty\"\r",
+									"            ],\r",
+									"            \"status\": \"failed\"\r",
+									"        }\r",
+									"    ],\r",
+									"    \"required\": [\r",
+									"        \"message\",\r",
+									"        \"status\"\r",
+									"    ],\r",
+									"    \"properties\": {\r",
+									"        \"message\": {\r",
+									"            \"$id\": \"#/properties/message\",\r",
+									"            \"type\": \"array\",\r",
+									"            \"title\": \"The message schema\",\r",
+									"            \"description\": \"An explanation about the purpose of this instance.\",\r",
+									"            \"default\": [],\r",
+									"            \"examples\": [\r",
+									"                [\r",
+									"                    \"phone_number must be non-empty\"\r",
+									"                ]\r",
+									"            ],\r",
+									"            \"additionalItems\": true,\r",
+									"            \"items\": {\r",
+									"                \"$id\": \"#/properties/message/items\",\r",
+									"                \"anyOf\": [\r",
+									"                    {\r",
+									"                        \"$id\": \"#/properties/message/items/anyOf/0\",\r",
+									"                        \"type\": \"string\",\r",
+									"                        \"title\": \"The first anyOf schema\",\r",
+									"                        \"description\": \"An explanation about the purpose of this instance.\",\r",
+									"                        \"default\": \"\",\r",
+									"                        \"examples\": [\r",
+									"                            \"phone_number must be non-empty\"\r",
+									"                        ]\r",
+									"                    }\r",
+									"                ]\r",
+									"            }\r",
+									"        },\r",
+									"        \"status\": {\r",
+									"            \"$id\": \"#/properties/status\",\r",
+									"            \"type\": \"string\",\r",
+									"            \"title\": \"The status schema\",\r",
+									"            \"description\": \"An explanation about the purpose of this instance.\",\r",
+									"            \"default\": \"\",\r",
+									"            \"examples\": [\r",
+									"                \"failed\"\r",
+									"            ]\r",
+									"        }\r",
+									"    },\r",
+									"    \"additionalProperties\": true\r",
+									"}\r",
+									"tests[\"valid schema\"] = tv4.validate(jsonData, schema);"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{Token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n\"phone_number\": \"3477416666\",\r\n\"company_id\":\"377\",\r\n\"iso_code\": \"US\",\r\n\"first_name\":\"Duha\",\r\n\"last_name\":\"C\",\r\n\"nid\":\"235478954\",\r\n\"designation\":\"QA Field\",\r\n\"department\":\"\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{URL}}/api/v1/field-force/auth/register-user",
+							"host": [
+								"{{URL}}"
+							],
+							"path": [
+								"api",
+								"v1",
+								"field-force",
+								"auth",
+								"register-user"
+							]
+						},
+						"description": "Objective:Company admin should not be able to register app user without department\r\nSE: Shiblu Ahmed\r\nPO: Pranto Majumder\r\nQA: Duha Chowdhury\r\nReviewer:Pranto Majumder\r\nTest Steps: Test steps includes the following payload as a json format in body\r\nMethod: POST\r\n{\r\n\"phone_number\": \"3477416666\",\r\n\"company_id\":377 ,\r\n\"iso_code\": \"US\",\r\n\"first_name\":\"Duha\",\r\n\"last_name\":\"C\",\r\n\"nid\":\"235478954\",\r\n\"designation\":\"\",\r\n\"department\":\"Tech\"\r\n}\r\nExpected Result:\r\n{\r\n    \"message\": [\r\n        \"department must be non-empty\"\r\n    ],\r\n    \"status\": \"failed\"\r\n}\r\n\r\nActual Result:\r\n{\r\n    \"message\": [\r\n        \"department must be non-empty\"\r\n    ],\r\n    \"status\": \"failed\"\r\n}\r\n\r\nStatus Code: 403 forbidden\r\nTest Result: Pass"
+					},
+					"response": []
+				}
+			],
+			"protocolProfileBehavior": {}
+		}
+	],
+	"event": [
+		{
+			"listen": "prerequest",
+			"script": {
+				"id": "0277bea2-ee42-48a5-8270-b5f6c543b735",
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		},
+		{
+			"listen": "test",
+			"script": {
+				"id": "bd1a5162-3a88-4661-804e-b34ea00a819d",
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		}
+	],
+	"protocolProfileBehavior": {}
+}
